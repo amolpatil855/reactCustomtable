@@ -1,0 +1,152 @@
+/*======= All App Files Include Here ======*/
+
+//Default Bootstrap File
+@import "./bootstrap";
+
+//Slick Slider
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+/*==== Core Mixins ====*/
+@import "./custom/mixins/mixin";
+
+/*==== Core Utilities =====*/
+@import "./custom/utilities/utilities";
+
+// Custom Variables Files
+@import "./custom";
+
+// Custom Layout Files
+@import "./custom/layouts/layout";
+
+.rct-sidebar .rct-mainMenu li a.item-active,
+.rct-sidebar .rct-mainMenu li a.item-active i,
+.rct-sidebar .rct-mainMenu li.item-active,
+.rct-sidebar .rct-mainMenu li.item-active i {
+  font-weight: 400;
+  color: #eec300;
+}
+.rct-sidebar .rct-mainMenu .sub-menu li {
+  background-color: #17242d;
+}
+.rct-sidebar .rct-mainMenu .sub-menu li a {
+  color: #8ea4b4;
+}
+.rct-sidebar .rct-mainMenu .sub-menu li a:active,
+.rct-sidebar .rct-mainMenu .sub-menu li a:focus {
+  color: #ca9e00;
+}
+
+// Doc Profile Summary Style Below
+
+.nopadL {
+  padding-left: 0px;
+}
+.nopadR {
+  padding-right: 0px;
+}
+.docProfile {
+  background-color: #fff;
+  border: 1px solid #e7e8e8;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+.docDetails {
+  border-right: 1px solid #e7e8e8;
+  height: 100%;
+  padding: 2rem;
+}
+.docName {
+  color: #1b4a74;
+  text-align: left;
+}
+.labelBadge {
+  background-color: #23649e;
+  border-radius: 30px;
+  color: #fff;
+  width: 7rem;
+  height: 1.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+}
+.docDetailDesc {
+  text-align: left;
+  margin-top: 20px;
+  padding: 10px 0px 10px 10px;
+}
+.docDetailDesc p {
+  color: #838383;
+  font-size: 0.9rem;
+  margin-bottom: 0px;
+  font-weight: 600;
+}
+.docDetailDesc h5 {
+  color: #000;
+}
+.docDetailDesc1 {
+  border-bottom: 1px solid #e7e8e8;
+  /*padding: 10px 0px 10px 20px;*/
+  height: 50%;
+}
+.docDetailDesc1 > .row {
+  height: 100%;
+}
+.docDetailDesc1 > .row > .col-sm-6 {
+  border-right: 1px solid #e7e8e8;
+}
+.docDetailDesc2 {
+  height: 50%;
+}
+.docDetailDesc2 > .col-sm-6 {
+  border-right: 1px solid #e7e8e8;
+}
+.viewDetailFull {
+  display: none;
+}
+.rct-dropdown .dropdown-menu {
+  top: 28px !important;
+  left: -63px !important;
+}
+@media only screen and (max-width: 760px) {
+  .docDetails .docDetailDesc {
+    text-align: center;
+  }
+  .docDetailDesc {
+    margin-top: 0px;
+  }
+  .docDetails {
+    border-bottom: 1px solid #e7e8e8;
+    padding-bottom: 0px;
+  }
+  .docName {
+    text-align: center;
+  }
+  .labelBadge {
+    margin: 0px auto;
+  }
+  .docDetailDesc1,
+  .docDetailDesc2 {
+    padding: 10px 0px 10px 20px;
+    text-align: center;
+  }
+  .viewDetailFull {
+    display: block;
+    background-color: #23649e;
+    color: #fff;
+    width: 100%;
+    height: 3rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+}
+
+.dropdown-show {
+  display: block;
+}
+
+.dropdown {
+  float: right;
+  margin-right: 10px;
+}
