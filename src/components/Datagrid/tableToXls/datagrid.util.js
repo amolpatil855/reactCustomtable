@@ -1,5 +1,7 @@
-﻿export class DataGridUtil {
-  public static downloadcsv(data: any, exportFileName: string) {
+﻿import React, { Component } from "react";
+
+class DataGridUtil extends Component {
+  downloadcsv = (data, exportFileName) => {
     var csvData = this.convertToCSV(data);
 
     var blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
@@ -8,11 +10,11 @@
       // IE 10+
       navigator.msSaveBlob(blob, this.createFileName(exportFileName));
     } else {
-      var link = document.createElement("a");
+      let link = document.createElement("a");
       if (link.download !== undefined) {
         // feature detection
         // Browsers that support HTML5 download attribute
-        var url = URL.createObjectURL(blob);
+        let url = URL.createObjectURL(blob);
         link.setAttribute("href", url);
         link.setAttribute("download", this.createFileName(exportFileName));
         //link.style = "visibility:hidden";
@@ -21,15 +23,15 @@
         document.body.removeChild(link);
       }
     }
-  }
+  };
 
-  private static convertToCSV(objarray: any) {
-    var array = typeof objarray != "object" ? JSON.parse(objarray) : objarray;
+  convertToCSV(objarray) {
+    var array = typeof objarray !== "object" ? JSON.parse(objarray) : objarray;
 
     var str = "";
     var row = "";
 
-    for (var index in objarray[0]) {
+    for (let index in objarray[0]) {
       //Now convert each value to string and comma-separated
       row += index + ",";
     }
@@ -37,9 +39,9 @@
     //append Label row with line break
     str += row + "\r\n";
 
-    for (var i = 0; i < array.length; i++) {
-      var line = "";
-      for (var index in array[i]) {
+    for (let i = 0; i < array.length; i++) {
+      let line = "";
+      for (let index in array[i]) {
         if (line != "") line += ",";
         line += JSON.stringify(array[i][index]);
       }
@@ -48,7 +50,7 @@
     return str;
   }
 
-  private static createFileName(exportFileName: string): string {
+  createFileName(exportFileName) {
     var date = new Date();
     return (
       exportFileName +
@@ -59,3 +61,5 @@
     );
   }
 }
+
+export default DataGridUtil;

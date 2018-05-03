@@ -109,7 +109,8 @@ class GridFilterDropdown extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.data) {
-      this.setState({ filteredData: nextProps.data });
+      let filteredData = _.uniqBy(nextProps.data, this.props.columnName);
+      this.setState({ filteredData: filteredData });
     }
   }
 

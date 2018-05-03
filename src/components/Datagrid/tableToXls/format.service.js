@@ -1,11 +1,12 @@
-﻿export class FormatService {
+﻿import React, { Component } from "react";
+class FormatService extends Component {
   // datePipe: DatePipe = new DatePipe('yMd');
-  transform(input: any, args: any): any {
+  transform = (input, args) => {
     if (input == null) return "";
-    var format = "";
-    var parsedFloat = 0;
-    var pipeArgs = args.split(":");
-    for (var i = 0; i < pipeArgs.length; i++) {
+    let format = "";
+    let parsedFloat = 0;
+    let pipeArgs = args.split(":");
+    for (let i = 0; i < pipeArgs.length; i++) {
       pipeArgs[i] = pipeArgs[i].trim(" ");
     }
 
@@ -19,7 +20,7 @@
       case "csv":
         if (input.length == 0) return "";
         if (input.length == 1) return input[0].text;
-        let finalstr: string = "";
+        let finalstr = "";
         for (let i = 0; i < input.length; i++) {
           finalstr = finalstr + input[i].text + ", ";
         }
@@ -27,9 +28,10 @@
       default:
         return input;
     }
-  }
+  };
 
-  private getDate(date: string): any {
+  getDate(date) {
     return new Date(date).toLocaleDateString();
   }
 }
+export default FormatService;

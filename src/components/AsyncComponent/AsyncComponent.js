@@ -18,5 +18,8 @@ const AsyncDataTable = Loadable({
   loader: () => import("../../routes/data-table"),
   loading: () => <RctPageLoader />
 });
-
-export { AsyncDashboardComponent, AsyncDataTable };
+const AsynCustomTable = Loadable({
+  loader: () => import("../Datagrid/datagrid"),
+  loading: () => <RctPageLoader />
+});
+export { AsyncDashboardComponent, AsyncDataTable, AsynCustomTable };

@@ -4,13 +4,19 @@
 /* eslint-disable */
 import React from "react";
 import MUIDataTable from "mui-datatables";
-
+import axios from "axios";
 // page title bar
 import PageTitleBar from "../../components/PageTitleBar/PageTitleBar";
 import DataGrid from "../../components/Datagrid/datagrid";
+import {
+  AsynCustomTable,
+  AsyncDataTable
+} from "../../components/AsyncComponent/AsyncComponent";
+
+import DataGridUtil from "../../components/Datagrid/tableToXls/datagrid.util";
+import FormatService from "../../components/Datagrid/tableToXls/format.service";
 // // rct card box
 // import RctCollapsibleCard from "../../../components/RctCollapsibleCard/RctCollapsibleCard";
-
 // intl messages
 import IntlMessages from "../../util/IntlMessages";
 // import Pagination from "react-js-pagination";
@@ -23,188 +29,45 @@ class DataTable extends React.Component {
       totalItemsCount: 0,
       itemsCountPerPage: 10,
       columns: [
-        { columnName: "Account", linkAction: this.columnAction },
-        { columnName: "Doctor Id" },
-        { columnName: "Email" },
-        { columnName: "Telephone" },
-        { columnName: "Sales Person" },
-        { columnName: "Sales Territory" }
+        {
+          columnName: "DoctorID",
+          linkAction: this.columnAction,
+          variable: "DoctorID",
+          filter: "text"
+        },
+        {
+          columnName: "ItemDescription",
+          variable: "ItemDescription",
+          filter: "text"
+        },
+        {
+          columnName: "DoctorName",
+          variable: "DoctorName",
+          filter: "text"
+        },
+        {
+          columnName: "Standard",
+          variable: "Standard",
+          filter: "text"
+        },
+        {
+          columnName: "RemakeAmount",
+          variable: "RemakeAmount",
+          filter: "text"
+        },
+        {
+          columnName: "RemakeUnits",
+          variable: "RemakeUnits",
+          filter: "text"
+        }
       ],
       Actions: [
         { actionName: "Add", callback: this.columnAction },
         { actionName: "Edit", callback: this.columnAction },
         { actionName: "Delete", callback: this.columnAction }
       ],
-      rowData: [
-        {
-          Account: "Dr Adam",
-          "Doctor Id": "Test 2",
-          Email: "Adam@info.com",
-          Telephone: "8527419630",
-          "Sales Person": "Demo2",
-          "Sales Territory": "South"
-        },
-        {
-          Account: "Dr Green",
-          "Doctor Id": "Test 3",
-          Email: "Green@info.com",
-          Telephone: "8527419630",
-          "Sales Person": "Demo3",
-          "Sales Territory": "Mid South"
-        },
-        {
-          Account: "Dr Albert",
-          "Doctor Id": "Test 4",
-          Email: "Albert@info.com",
-          Telephone: "8527419630",
-          "Sales Person": "Demo4",
-          "Sales Territory": "South East"
-        },
-        {
-          Account: "Dr Alf",
-          "Doctor Id": "Test 5",
-          Email: "Alf@info.com",
-          Telephone: "8527419630",
-          "Sales Person": "Demo5",
-          "Sales Territory": "Mid Atlantic"
-        },
-        {
-          Account: "Dr Jakson",
-          "Doctor Id": "Test 6",
-          Email: "Jakson@info.com",
-          Telephone: "8527419630",
-          "Sales Person": "Demo6",
-          "Sales Territory": "North"
-        },
-        {
-          Account: "Dr Robart",
-          "Doctor Id": "Test 7",
-          Email: "Robart@info.com",
-          Telephone: "8527419630",
-          "Sales Person": "Demo7",
-          "Sales Territory": "South East"
-        },
-        {
-          Account: "Dr joe",
-          "Doctor Id": "Test 8",
-          Email: "joe@info.com",
-          Telephone: "8527419630",
-          "Sales Person": "Demo8",
-          "Sales Territory": "North"
-        },
-        {
-          Account: "Dr Smith",
-          "Doctor Id": "Test 9",
-          Email: "Smith@info.com",
-          Telephone: "8527419630",
-          "Sales Person": "Demo9",
-          "Sales Territory": "South East"
-        },
-        {
-          Account: "Dr Rag",
-          "Doctor Id": "Test 10",
-          Email: "Rag@info.com",
-          Telephone: "8527419630",
-          "Sales Person": "Demo10",
-          "Sales Territory": "North"
-        },
-        {
-          Account: "Dr Pointing",
-          "Doctor Id": "Test 11",
-          Email: "Pointing@info.com",
-          Telephone: "8527419630",
-          "Sales Person": "Demo11",
-          "Sales Territory": "South East"
-        },
-        {
-          Account: "Dr Clark",
-          "Doctor Id": "Test 12",
-          Email: "Clark@info.com",
-          Telephone: "8527419630",
-          "Sales Person": "Demo12",
-          "Sales Territory": "North"
-        },
-        {
-          Account: "Dr Max",
-          "Doctor Id": "Test 1",
-          Email: "Max@info.com",
-          Telephone: "8527419630",
-          "Sales Person": "Demo13",
-          "Sales Territory": "Mid South"
-        },
-        {
-          Account: "Dr Stive",
-          "Doctor Id": "Test 1",
-          Email: "Stive@info.com",
-          Telephone: "8527419630",
-          "Sales Person": "Demo14",
-          "Sales Territory": "Mid South"
-        },
-        {
-          Account: "Dr Rok",
-          "Doctor Id": "Test 1",
-          Email: "Rok@info.com",
-          Telephone: "8527419630",
-          "Sales Person": "Demo15",
-          "Sales Territory": "North"
-        },
-        {
-          Account: "Dr Leman",
-          "Doctor Id": "Test 1",
-          Email: "Leman@info.com",
-          Telephone: "8527419630",
-          "Sales Person": "Demo16",
-          "Sales Territory": "Mid South"
-        },
-        {
-          Account: "Dr Grag",
-          "Doctor Id": "Test 1",
-          Email: "Grag@info.com",
-          Telephone: "8527419630",
-          "Sales Person": "Demo17",
-          "Sales Territory": "North"
-        },
-        {
-          Account: "Dr Burd",
-          "Doctor Id": "Test 1",
-          Email: "Test@info.com",
-          Telephone: "8527419630",
-          "Sales Person": "Demo18",
-          "Sales Territory": "North"
-        },
-        {
-          Account: "Dr Beeker",
-          "Doctor Id": "Test 1",
-          Email: "Beeker@info.com",
-          Telephone: "8527419630",
-          "Sales Person": "Demo19",
-          "Sales Territory": "North"
-        },
-        {
-          Account: "Dr George",
-          "Doctor Id": "Test 1",
-          Email: "George@info.com",
-          Telephone: "8527419630",
-          "Sales Person": "Demo20",
-          "Sales Territory": "North"
-        },
-        {
-          Account: "Dr George",
-          "Doctor Id": "Test 1",
-          Email: "George@info.com",
-          Telephone: "8527419630",
-          "Sales Person": "Demo21",
-          "Sales Territory": "North"
-        },
-        {
-          Account: "Dr George",
-          "Doctor Id": "Test 1",
-          Email: "George@info.com",
-          Telephone: "8527419630",
-          "Sales Person": "Demo1",
-          "Sales Territory": "North"
-        }
-      ]
+      rowData: [],
+      isLoading: true
     };
     //this.hideShowColumn = this.hideShowColumn.bind(this);
     this.handlePageChange = this.handlePageChange.bind(this);
@@ -215,8 +78,50 @@ class DataTable extends React.Component {
     // this.setState({
     //   totalItemsCount: this.state.rowData.length,
     // });
+    axios
+      .get(
+        `https://labtracdataconnector.servicebus.windows.net/DataConnector/4550ca84c83f44f99c968a357ab1c290/getdata?params=%7b%22method%22%3a%7b%22name%22%3a%22SalesData%22%2c%22startDate%22%3a%2212%2f1%2f2017%22%2c%22endDate%22%3a%2212%2f31%2f2017%22%7d%7d`,
+        { crossdomain: true }
+      )
+      .then(response => {
+        // dispatch({ type: GET_FEEDBACKS_SUCCESS, payload: response.data });
+        this.setState({ rowData: response.data, isLoading: false });
+        //this.exporttoCSV(response.data, this.state.columns, "test");
+      })
+      .catch(error => {
+        // error handling
+      });
   }
 
+  exporttoCSV(data, columns, categoryName) {
+    var _dataGridUtil = new DataGridUtil();
+    let exprtcsv = [];
+    let _tempList = data;
+    let exportFileName = "MasterPriceListReportFor" + categoryName + "_";
+    JSON.parse(JSON.stringify(_tempList)).forEach(x => {
+      var obj = new Object();
+      var frmt = new FormatService();
+      for (var i = 0; i < columns.length; i++) {
+        if (columns[i].variable.indexOf(".") > -1) {
+          let transfrmVal = frmt.transform(
+            x[columns[i].variable.split(".")[0]][
+              columns[i].variable.split(".")[1]
+            ],
+            columns[i].filter
+          );
+          obj[columns[i].columnName] = transfrmVal;
+        } else {
+          let transfrmVal = frmt.transform(
+            x[columns[i].variable],
+            columns[i].filter
+          );
+          obj[columns[i].columnName] = transfrmVal;
+        }
+      }
+      exprtcsv.push(obj);
+    });
+    _dataGridUtil.downloadcsv(exprtcsv, exportFileName);
+  }
   columnAction(columnName, data) {
     console.log(columnName);
     console.log(data);
@@ -240,128 +145,7 @@ class DataTable extends React.Component {
   }
 
   render() {
-    const data = [
-      ["Dr Adam", "Test 2", "Adam@info.com", "8527419630", "Demo2", "South"],
-      [
-        "Dr George",
-        "Test 1",
-        "George@info.com",
-        "8527419630",
-        "Demo1",
-        "North"
-      ],
-      [
-        "Dr Green",
-        "Test 3",
-        "Green@info.com",
-        "8527419630",
-        "Demo3",
-        "Mid South"
-      ],
-      [
-        "Dr Albert",
-        "Test 4",
-        "Albert@info.com",
-        "8527419630",
-        "Demo4",
-        "South East"
-      ],
-      [
-        "Dr Alf",
-        "Test 5",
-        "Alf@info.com",
-        "8527419630",
-        "Demo5",
-        "Mid Atlantic"
-      ],
-      [
-        "Dr Jakson",
-        "Test 6",
-        "Jakson@info.com",
-        "8527419630",
-        "Demo6",
-        "North"
-      ],
-      [
-        "Dr Robart",
-        "Test 7",
-        "Robart@info.com",
-        "8527419630",
-        "Demo7",
-        "South East"
-      ],
-      ["Dr joe", "Test 8", "joe@info.com", "8527419630", "Demo8", "North"],
-      [
-        "Dr Smith",
-        "Test 9",
-        "Smith@info.com",
-        "8527419630",
-        "Demo9",
-        "South East"
-      ],
-      ["Dr Rag", "Test 10", "Rag@info.com", "8527419630", "Demo10", "North"],
-      [
-        "Dr Pointing",
-        "Test 11",
-        "Pointing@info.com",
-        "8527419630",
-        "Demo11",
-        "South East"
-      ],
-      [
-        "Dr Clark",
-        "Test 12",
-        "Clark@info.com",
-        "8527419630",
-        "Demo12",
-        "North"
-      ],
-      ["Dr Max", "Test 1", "Max@info.com", "8527419630", "Demo13", "Mid South"],
-      [
-        "Dr Stive",
-        "Test 1",
-        "Stive@info.com",
-        "8527419630",
-        "Demo14",
-        "Mid South"
-      ],
-      ["Dr Rok", "Test 1", "Rok@info.com", "8527419630", "Demo15", "North"],
-      [
-        "Dr Leman",
-        "Test 1",
-        "Leman@info.com",
-        "8527419630",
-        "Demo16",
-        "Mid South"
-      ],
-      ["Dr Grag", "Test 1", "Grag@info.com", "8527419630", "Demo17", "North"],
-      ["Dr Burd", "Test 1", "test@info.com", "8527419630", "Demo18", "North"],
-      [
-        "Dr Beeker",
-        "Test 1",
-        "Beeker@info.com",
-        "8527419630",
-        "Demo19",
-        "North"
-      ],
-      [
-        "Dr George",
-        "Test 1",
-        "George@info.com",
-        "8527419630",
-        "Demo20",
-        "North"
-      ],
-      [
-        "Dr George",
-        "Test 1",
-        "George@info.com",
-        "8527419630",
-        "Demo21",
-        "North"
-      ]
-    ];
-
+    console.log(this.state.rowData);
     const options = {
       filterType: "multiselect",
       responsive: "stacked",
@@ -383,8 +167,9 @@ class DataTable extends React.Component {
         {/* <RctCollapsibleCard fullBlock> */}
         {/* <MUIDataTable title={"Doctor list"} data={data} columns={columns} options={options} /> */}
 
-        <DataGrid
+        <AsynCustomTable
           items={this.state.rowData}
+          isLoading={this.state.isLoading}
           columns={this.state.columns}
           Actions={this.state.Actions}
           pageSize={5}

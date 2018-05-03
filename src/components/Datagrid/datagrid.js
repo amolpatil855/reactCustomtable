@@ -2,7 +2,9 @@ import React from "react";
 import Pagination from "./Pagination";
 import GridAction from "./GridAction";
 import GridFilterDropdown from "./GridFilterDropdown";
+import RctPageLoader from "../RctPageLoader/RctPageLoader";
 var _ = require("lodash");
+
 class DataGrid extends React.Component {
   constructor() {
     super();
@@ -148,13 +150,27 @@ class DataGrid extends React.Component {
 
   componentDidMount() {
     let _isMobileView = this.checkDevice();
+    console.log("dataGrid=" + this.props.items);
     this.setState({
       // totalItemsCount: this.state.rowData.length,
       filteredData: _.cloneDeep(this.props.items),
       selectedColumn: _.cloneDeep(this.props.columns),
       dataForColumnFilter: _.cloneDeep(this.props.items),
-      isMobileView: _isMobileView
+      isMobileView: _isMobileView,
+      isLoading: this.props.isLoading
     });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.items) {
+      this.setState({
+        // totalItemsCount: this.state.rowData.length,
+        isLoading: nextProps.isLoading,
+        filteredData: _.cloneDeep(nextProps.items),
+        selectedColumn: _.cloneDeep(nextProps.columns),
+        dataForColumnFilter: _.cloneDeep(nextProps.items)
+      });
+    }
   }
 
   checkDevice() {
@@ -395,6 +411,9 @@ class DataGrid extends React.Component {
   }
 
   renderAsPerDevice() {
+    if (this.state.isLoading) {
+      return <RctPageLoader />;
+    }
     if (this.state.isMobileView) {
       return (
         <div>
@@ -562,6 +581,7 @@ class DataGrid extends React.Component {
   }
 
   render() {
+    console.log("render dataGrid=" + this.state.filteredData);
     return (
       <div className="data-table-wrapper">
         <GridFilterDropdown
